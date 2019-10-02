@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Estudio de Partidos de Fútbol</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .registro {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 24px;
+            border-right: 1px solid gainsboro;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 3;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        form * {
+            padding: 6px;
+        }
+
+        .dashboard > div {
+            display: flex;
+        }
+        .dashboard > div > div {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid gainsboro;
+            padding: 6px;
+        }
+
+        .dashboard > div > div > img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="registro">
+        <form action="/registrar">
+            <label>Nombre</label>
+            <input name="nombre" id="nombre" type="text" placeholder="Nombre">
+            <label>Edad</label>
+            <input name="edad" id="edad" type="number" placeholder="Edad" value="18">
+            <label>Género</label>
+            <select name="genero" id="genero">
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <label>Sueldo</label>
+            <input name="sueldo" id="sueldo" type="number" placeholder="Sueldo" value="0">
+            <label>Escolaridad</label>
+            <select name="escolaridad" id="escolaridad">
+                <option value="Primaria">Primaria</option>
+                <option value="Secundaria">Secundaria</option>
+                <option value="Preparatoria">Preparatoria</option>
+                <option value="Universidad">Universidad</option>
+                <option value="Maestría">Maestría</option>
+                <option value="Doctorado">Doctorado</option>
+                <option value="Pos Doctorado">Pos Doctorado</option>
+            </select>
+            <label>¿Tienes auto?</label>
+            <select name="carro" id="carro">
+                <option value="Si">SI</option>
+                <option value="No">NO</option>
+            </select>
+            <label>Equipo</label>
+            <select name="equipo" id="equipo">
+                <option value="Gallos">Gallos</option>
+                <option value="Chivas">Chivas</option>
+                <option value="América">América</option>
+                <option value="León">León</option>
+                <option value="Celaya">Celaya</option>
+                <option value="Tiburones">Tiburones</option>
+                <option value="Santos">Santos</option>
+                <option value="Atlético">Atlético</option>
+                <option value="Tigres">Tigres</option>
+            </select>
+            <br>
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+    <div class="dashboard">
+        <div>
+            <div>
+                <img id="plot_edad" src="http://placehold.it/200">
+            </div>
+            <div>
+                <img id="plot_genero" src="http://placehold.it/200">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img id="plot_sueldo" src="http://placehold.it/200">
+            </div>
+            <div>
+                <img id="plot_escolaridad" src="http://placehold.it/200">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img id="plot_carro" src="http://placehold.it/200">
+            </div>
+            <div>
+                <img id="plot_equipo" src="http://placehold.it/200">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const params = (window.location.href.split("?")[1] || "")
+            .split("&").map(param => param.split("="))
+            .reduce((params, [key, value]) => {
+                params[key] = value;
+                return params;
+            }, {});
+
+        setTimeout(() => {
+            // if (params.alert) alert(params.alert);
+        }, 100);
+
+        const plot_edad = document.getElementById("plot_edad");
+        const plot_genero = document.getElementById("plot_genero");
+        const plot_sueldo = document.getElementById("plot_sueldo");
+        const plot_escolaridad = document.getElementById("plot_escolaridad");
+        const plot_carro = document.getElementById("plot_carro");
+        const plot_equipo = document.getElementById("plot_equipo");
+
+        let t = 0;
+
+        function update() {
+            plot_edad.src = `/plot/edad?t=${t}`;
+            plot_genero.src = `/plot/genero?t=${t}`;
+            plot_sueldo.src = `/plot/sueldo?t=${t}`;
+            // console.log("actualizado", new Date());
+            t++;
+        }
+
+        setInterval(update, 1000);
+        update();
+    </script>
+</body>
+</html>
