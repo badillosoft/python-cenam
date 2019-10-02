@@ -1,6 +1,6 @@
 # Taller de Python CENAM
 
-## Almacenamiento de Datos
+## Manejo de Datos
 
 * CSV
 * Excel
