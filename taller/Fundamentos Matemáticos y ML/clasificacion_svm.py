@@ -25,7 +25,7 @@ Y = iris["F"].map({
 from sklearn.svm import SVC
 
 # Creamos un clasificador basado en la técnica de Vectores de Soporte
-clf = SVC()
+clf = SVC(gamma="scale")
 
 # Entrenamos el clasificador
 clf.fit(X, Y)
